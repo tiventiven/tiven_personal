@@ -1,0 +1,2 @@
+Ini adalah file5.txt
+Seharusnya masih tetep ada baris ke 2g
