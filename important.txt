@@ -1,9 +1,0 @@
-Important Terminal Parameter to access engine
-psql -h localhost -p 5432
-##to access psql locally. note make sure docker psql running
-
-mysql -u root
-#to access mysql
-
-docker exec -it wizardly_joliot /bin/bash
-#masuk docker ubuntu. lewat terminal
