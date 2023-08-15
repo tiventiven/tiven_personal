@@ -28,4 +28,4 @@ echo "jalanin script kedua untuk postgres"
 cd
 sudo mkdir -p /data/postgres/data
 sudo chown postgres. -R /data/postgres
-sudo su - postgres -c "etc/latihan/postgres_setup.sh"
+sudo su - postgres -c "/etc/latihan/postgres_setup.sh"
