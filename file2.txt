@@ -1,2 +1,0 @@
-Menambahkan file2.txt 
-Menambahkan isi dibaris kedua
