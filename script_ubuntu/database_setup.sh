@@ -9,7 +9,7 @@ psql -d testing -c "INSERT INTO testing_userlist(first_name,last_name,created_on
 psql -c "CREATE ROLE tiven;"
 psql -c "CREATE ROLE enggar;"
 psql -c "ALTER ROLE tiven WITH LOGIN ENCRYPTED PASSWORD 'handiko123'"
-psql -c "ALTER ROLE tiven WITH LOGIN ENCRYPTED PASSWORD 'enggar'"
+psql -c "ALTER ROLE enggar WITH LOGIN ENCRYPTED PASSWORD 'enggar'"
 psql -c "ALTER GROUP admin ADD USER tiven, enggar;"
 psql -d testing -c "GRANT ALL PRIVILEGES ON testing_userlist TO admin;"
 psql -d testing -c "TABLE testing_userlist;"
