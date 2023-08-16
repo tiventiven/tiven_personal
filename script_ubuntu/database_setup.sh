@@ -1,4 +1,9 @@
 #!/bin/bash
+
+read -p "What is the user name: " user_1
+read -p "What is the password for the user: " user_password1
+
+#code
 psql -c "CREATE DATABASE testing;"
 echo "membuat table testing_userlist"
 sleep 3
@@ -6,11 +11,9 @@ psql -d testing -c "CREATE TABLE testing_userlist(user_id SERIAL PRIMARY KEY UNI
 echo "mengisi table testing_userlist"
 sleep 3
 psql -d testing -c "INSERT INTO testing_userlist(first_name,last_name,created_on) VALUES ('tiven','hunter',CURRENT_TIMESTAMP),('shaina','angelica',CURRENT_TIMESTAMP);"
-psql -c "CREATE ROLE tiven;"
-psql -c "CREATE ROLE enggar;"
-psql -c "ALTER ROLE tiven WITH LOGIN ENCRYPTED PASSWORD 'handiko123'"
-psql -c "ALTER ROLE enggar WITH LOGIN ENCRYPTED PASSWORD 'enggar'"
-psql -c "ALTER GROUP admin ADD USER tiven, enggar;"
+psql -c "CREATE ROLE $user_1;"
+psql -c "ALTER ROLE $user_1 WITH LOGIN ENCRYPTED PASSWORD '$user_password1'"
+psql -c "ALTER GROUP admin ADD USER $user_1;"
 psql -d testing -c "GRANT ALL PRIVILEGES ON testing_userlist TO admin;"
 psql -d testing -c "TABLE testing_userlist;"
 # psql -d testing -c "\l+"
