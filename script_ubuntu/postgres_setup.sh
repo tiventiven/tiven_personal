@@ -50,7 +50,8 @@ host  replication replicator 10.164.0.0/16   md5
 host  all replicator 10.164.0.0/16   md5
 host all postgres 192.168.64.0/24 md5
 host all tiven 192.168.64.0/24 md5
-host all enggar 192.168.64.0/24 md5
+host all +admin 192.168.64.0/24 md5
+host all all 192.168.64.0/24 md5
 EOF
 pg_ctlcluster 12 testing start 
 psql -c "CREATE ROLE admin; "
