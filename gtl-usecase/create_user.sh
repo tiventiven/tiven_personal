@@ -12,5 +12,4 @@ dbname=$dbname
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "ALTER ROLE gtl_bqetl_stg PASSWORD '';"
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtdb_superuser;" -c "COMMENT ON ROLE gtl_bqetl_stg  IS 'blablabla';"
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtdb_superuser;" -c "ALTER GROUP analytic_access ADD USER gtl_bqetl_stg;"
-
 fi
