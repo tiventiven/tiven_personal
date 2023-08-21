@@ -2,12 +2,12 @@
 ipps=192.168.64.8
 userdb=admin
 dbname=logical
-tablename=logical_test
+tablename=logical_test123
 
  validate=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_roles where rolname = 'gtl_bqetl_stg';" | xargs`
     validatedb=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_database where datname = '$dbname';" | xargs`
 
- if [[ $validate = 0 && $validatedb = 1 ]]
+ if [[ $validate = 1 && $validatedb = 1 ]]
  then
     echo "+++++++++++++++++++++++++++"
     echo "Checking all good, continue"
@@ -64,7 +64,7 @@ for table in $tablename; do
     psql -X -h $ipps -U $userdb -d $dbname -c "grant select on $table to analytic_access;"
     psql -X -h $ipps -U $userdb -d $dbname -c "\z $table"
 
-    validatetables=$(psql -X -h $ipps -U $userdb -d $dbname -t -c "\z $table" | grep -wc admin | xargs)
+    validatetables=$(psql -X -h $ipps -U $userdb -d $dbname -t -c "\z $table" | grep -wc analytic_access | xargs)
     if [ "$validatetables" = 1 ]; then
         echo "Grant select for table $table Done"
         sleep 3
