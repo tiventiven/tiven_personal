@@ -33,10 +33,10 @@ valcreate=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg
 
     if [ $valcreate = 1 ]
     then
-        echo "bqetl_stg is already registered on this DB";
+        echo "gtl_bqetl_stg is already registered on this DB";
 	echo ""
 	sleep 2
     else
-        echo "failed to create role bqetl_stg please contact DBA team";
+        echo "failed to create role gtl_bqetl_stg please contact DBA team";
 	sleep 2
     fi
