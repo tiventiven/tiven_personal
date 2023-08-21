@@ -2,7 +2,15 @@
 ipps=192.168.64.8
 userdb=admin
 dbname=logical
-tablename=logical_test123
+tablename=logical_1,logical_2,logical_3
+
+   echo "++++++++++++++++++++++"
+    echo "Checking role existed"
+    echo "Checking db existed"
+    echo "+++++++++++++++++++++"
+    echo ""
+    sleep 3
+
 
  validate=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_roles where rolname = 'gtl_bqetl_stg';" | xargs`
     validatedb=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_database where datname = '$dbname';" | xargs`
@@ -52,9 +60,9 @@ fi
     sleep 5
 
     echo ""
-    echo "++++++++++++++++++++++++++++++++++++++++++"
-    echo "Grant Select on listed tables to bqetl_stg"
-    echo "++++++++++++++++++++++++++++++++++++++++++"
+    echo "++++++++++++++++++++++++++++++++++++++++++++++"
+    echo "Grant Select on listed tables to gtl_bqetl_stg"
+    echo "++++++++++++++++++++++++++++++++++++++++++++++"
     echo ""
     sleep 3
 
