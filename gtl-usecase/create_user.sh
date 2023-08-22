@@ -2,10 +2,12 @@
 ipps=192.168.64.8
 userdb=admin
 dbname=logical
+heimdallpass=$heimdallpass
     
-    echo "++++++++++++++++"
-    echo "Checking db user"
-    echo "++++++++++++++++"
+    echo "+++++++++++++++++"
+    echo "Checking db user "
+    echo "Checking database"
+    echo "+++++++++++++++++"
     echo ""
     sleep 3
     validate=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_roles where rolname = 'gtl_bqetl_stg';" | xargs`
@@ -14,7 +16,7 @@ dbname=logical
  if [[ $validate = 0 && $validatedb = 1 ]]
     then
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "CREATE ROLE gtl_bqetl_stg;"
-        psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "ALTER ROLE gtl_bqetl_stg PASSWORD '123';"
+        psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "ALTER ROLE gtl_bqetl_stg PASSWORD '$heimdallpass';"
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "COMMENT ON ROLE gtl_bqetl_stg  IS 'blablabla';"
         echo "Create role gtl_bqetl_stg done";
         sleep 2
@@ -29,6 +31,14 @@ fi
        then
         psql -X -h $ipps -U $userdb  -d $dbname -c "set role = gtldb_superuser;" -c "GRANT analytic_access to gtl_bqetl_stg;"
 fi
+
+    echo "++++++++++++++++"
+    echo "Checking db user"
+    echo "++++++++++++++++"
+    echo ""
+    sleep 3
+
+
 valcreate=`psql -X -h $ipps -U $userdb -d $dbname -t -c "SELECT count(*) FROM pg_roles where rolname = 'gtl_bqetl_stg';" | xargs`
 
     if [ $valcreate = 1 ]

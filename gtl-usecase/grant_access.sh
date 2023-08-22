@@ -2,7 +2,7 @@
 ipps=192.168.64.8
 userdb=admin
 dbname=logical
-tablename=logical_1,logical_2,logical_3
+tablename=logical_5
 
    echo "++++++++++++++++++++++"
     echo "Checking role existed"
