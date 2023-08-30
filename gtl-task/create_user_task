@@ -5,7 +5,7 @@ ip_list=("10.106.40.34" "10.106.40.50" "10.106.47.195")
 psql_super_user=gtljenkinssuper
 psql_super_user_password=KfH41a9W3oZEZ79RvewQGuEmJH9evd
 export PGPASSWORD="$psql_super_user_password"
-password=Mif56I09C4w5wvzBgf9za7izMKEmX
+password={{pass}}
 dbname=postgres
 
 # Loop through each IP address
