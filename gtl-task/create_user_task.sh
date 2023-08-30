@@ -1,9 +1,9 @@
 #!/bin/bash
 # Define a list of IP addresses
-ip_list=("10.106.40.34" "10.106.40.50" "10.106.47.195")
+ip_list=("ip1" "ip2" "ip3")
 
-psql_super_user=gtljenkinssuper
-psql_super_user_password=KfH41a9W3oZEZ79RvewQGuEmJH9evd
+psql_super_user={{super_user_username}}
+psql_super_user_password={{super_user_password}}
 export PGPASSWORD="$psql_super_user_password"
 password={{pass}}
 dbname=postgres
