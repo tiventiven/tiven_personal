@@ -5,11 +5,11 @@ do
    for ((j=1; j<=i; j++))
    do
 # Gunakan percabangan if untuk mengatur berapa banyak bintang yang dicetak pada setiap baris
-        if (( i <= 3 )); then
-            echo -n "* "
-        else
-            echo -n "** "
-        fi
+        # if (( i <= 3 )); then
+        #     echo -n "* "
+        # else
+        #     echo -n "** "
+        # fi
    done
    echo
 done
