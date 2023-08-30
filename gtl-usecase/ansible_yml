@@ -1,0 +1,90 @@
+---
+- name: Play to prepare the inventory
+  hosts: localhost
+  connection: local
+  tags:
+    - always
+  tasks:
+    # Fetch the secrets from GSM.
+    - name: Get the secrets for creds
+      set_fact:
+        creds: "{{ lookup('pipe', 'gcloud secrets versions access latest --secret=\"gtl-database-access\" --project=gtl-itsec-staging') }}"
+
+    - name: Set variables from creds
+      set_fact:
+        stg_jenkins_super_username: "{{ creds | from_json | json_query(\".stg_jenkins_super_user|.user\") }}"
+        stg_jenkins_super_user_pass: "{{ creds | from_json | json_query(\".stg_jenkins_super_user|.password\") }}"
+        stg_bqetl_user_pass: "{{ creds | from_json | json_query(\".stg_bqetl_user|.password\") }}"
+
+    - name: Set environment variables
+      ansible.builtin.set_fact:
+        stg_jenkins_super_username_env: "$stg_jenkins_super_username"
+        stg_jenkins_super_user_pass_env: "$stg_jenkins_super_user_pass"
+        stg_bqetl_user_pass_env: "$stg_bqetl_user_pass"
+
+
+###################### Pre-check user and credential on source #################
+# - name: Play to create Mysql users on source DB
+#   hosts: "{{ lookup('env', 'ANSIBLE_HOSTGROUP') }}"
+#   user: root
+#   tags:
+#     - setup
+
+- name: Run create_user.sh
+  hosts: "{{ lookup('env', 'ANSIBLE_HOSTGROUP') }}"
+  user: root
+  tasks:
+  tags: 
+    - create_user
+
+---
+- name: Download create_user.sh from GitHub
+  hosts: localhost
+  tasks:
+    - name: Download create_user.sh
+      get_url:
+        url: https://github.com/GoTo-Logistic/dbcode-gtl/raw/master-staging/DBA/Jenkins/create_user.sh
+        dest: /tmp/
+        mode: '0755'
+
+- name: Run create_user.sh
+  hosts: localhost
+  tasks:
+    - name: Run create_user.sh
+      shell: /bin/bash /tmp/create_user.sh
+      register: create_user_result
+
+    - name: Display create_user.sh output
+      debug:
+        var: create_user_result.stdout_lines  
+
+    - name: Delete create_user.sh
+      file:
+        path: /tmp/create_user.sh
+        state: absent
+
+- name: Grant access
+  hosts: "{{ lookup('env', 'ANSIBLE_HOSTGROUP') }}"
+  user: root
+  tags:
+    - grant_access
+  
+  tasks:
+    - name: Download grant_access.sh from GitHub
+      get_url:
+        url: https://github.com/GoTo-Logistic/dbcode-gtl/raw/master-staging/DBA/Jenkins/grant_access.sh
+        dest: /tmp/
+        mode: '0755'
+
+    - name: Run grant_access.sh
+      shell: /bin/bash /tmp/grant_access.sh
+      register: grant_access_result
+
+    - name: Display grant_access.sh output
+      debug:
+        var: grant_access_result.stdout_lines
+
+    - name: Delete grant_access.sh
+      file:
+        path: /tmp/grant_access.sh
+        state: absent
