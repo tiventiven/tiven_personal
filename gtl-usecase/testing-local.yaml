@@ -1,0 +1,26 @@
+---
+- name: Check "brew" command location and current date on localhost
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: Run "which brew" command
+      command: which brew
+      register: brew_location
+      tags: check_brew
+
+    - name: Display "brew" command location
+      debug:
+        var: brew_location.stdout
+      when: brew_location.rc == 0
+      tags: check_brew
+
+    - name: Check current date
+      command: date
+      register: current_date
+      tags: check_current_date
+
+    - name: Display current date
+      debug:
+        var: current_date.stdout
+      when: current_date is defined and current_date.rc == 0
+      tags: check_current_date
