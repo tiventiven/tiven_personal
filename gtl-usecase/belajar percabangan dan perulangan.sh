@@ -6,7 +6,7 @@ do
    do
 # Gunakan percabangan if untuk mengatur berapa banyak bintang yang dicetak pada setiap baris
         # if (( i <= 3 )); then
-        #     echo -n "* "
+             echo -n "* "
         # else
         #     echo -n "** "
         # fi
