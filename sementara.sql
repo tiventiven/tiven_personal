@@ -72,7 +72,7 @@ ORDER BY movement_balance_id DESC LIMIT 11 OFFSET 0;
 SELECT movement_balance_id, product_id, tenant_id, service_id, warehouse_id, partner_id, request_id, movement_code, ref, ref_type, notes, original_timestamp, stock_detail, created_at, created_by, is_vb
 FROM trx_stock_movement_balance
 WHERE product_id IN (655112055, 618149441, 670814141) AND original_timestamp >= '2023-08-01' AND original_timestamp <= '2023-09-01'
-ORDER BY movement_balance_id aSC LIMIT 50;
+ORDER BY movement_balance_id aSC LIMIT 0;
 
 SELECT movement_balance_id, product_id, tenant_id, service_id, warehouse_id, partner_id, request_id, movement_code, ref, ref_type, notes, original_timestamp, stock_detail, created_at, created_by, is_vb
 FROM trx_stock_movement_balance
