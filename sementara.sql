@@ -118,3 +118,15 @@ WHERE tenant_id IN (11871050,216863, 2068287) AND original_timestamp >= '2023-09
 ORDER BY movement_balance_id ASC LIMIT 50 OFFSET 0;
 
 create index concurrently trx_stock_movement_balance_mbid_asc_tid_time_ref_code_index on trx_stock_movement_balance (original_timestamp, tenant_id, movement_balance_id, ref, movement_code);
+
+CREATE INDEX CONCURRENTLY (index name) on configs (client_id, service_area_id);
+CREATE UNIQUE INDEX CONCURRENTLY index_name ON configs(serial_no);
+alter table configs drop constraint configs_pkey
+
+ALTER TABLE configs ADD PRIMARY KEY USING INDEX unique_index_name;
+create index concurrently testing on trx_stock_movement_balance (movement_balance_id, original_timestamp, product_id, status);
+
+CREATE INDEX CONCURRENTLY configs- on configs (client_id, service_area_id);
+CREATE UNIQUE INDEX CONCURRENTLY unique_index_name ON configs(serial_no);
+ALTER TABLE configs 
+DROP CONSTRAINT configs_pkey;
